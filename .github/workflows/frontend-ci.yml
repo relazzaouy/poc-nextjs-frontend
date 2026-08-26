@@ -21,8 +21,8 @@ jobs:
     name: Build & test
     runs-on: ubuntu-latest
     env:
-      # CI-only placeholder. The real value is injected by Render at image
-      # build time; here we only need the build to succeed.
+      # CI-only placeholder. The real value comes from the Vercel project's
+      # environment variables at build time; here the build just has to succeed.
       NEXT_PUBLIC_API_URL: http://localhost:3001
     steps:
       - name: Checkout

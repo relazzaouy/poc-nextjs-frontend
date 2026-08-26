@@ -9,9 +9,9 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 # NEXT_PUBLIC_* values are inlined into the client bundle at BUILD time, so the
-# backend URL has to be present here - not just at runtime. Render forwards the
-# service's environment variables to `docker build` as build args, which is how
-# this gets populated in production. See DEPLOYMENT.md.
+# backend URL has to be present here - not just at runtime. Pass it with
+# --build-arg when building the image. On Vercel this Dockerfile is not used;
+# the platform reads NEXT_PUBLIC_API_URL from the project during the build.
 ARG NEXT_PUBLIC_API_URL
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 
@@ -32,7 +32,7 @@ COPY --from=builder --chown=node:node /app/public ./public
 
 USER node
 
-# Render injects PORT at runtime; these are only the local-run defaults.
+# A container host injects PORT at runtime; these are only the local defaults.
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 EXPOSE 3000

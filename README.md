@@ -26,9 +26,9 @@ terminal, with `NEXT_PUBLIC_API_URL=http://localhost:3001` here.
 
 ## Environment variables
 
-| Variable | Local | Render |
+| Variable | Local | Deployed |
 | --- | --- | --- |
-| `NEXT_PUBLIC_API_URL` | `http://localhost:3001` | `https://poc-nestjs-backend.onrender.com` |
+| `NEXT_PUBLIC_API_URL` | `http://localhost:3001` | `https://poc-nestjs-backend.vercel.app` |
 
 No trailing slash — the app appends `/api/hello`.
 
@@ -58,7 +58,8 @@ docker run --rm -p 3000:3000 -e PORT=3000 poc-nextjs-frontend
 ```
 
 The build arg is not optional — omit it and the deployed page has no backend to
-call. Render supplies it from the service's environment variables.
+call. On Vercel the Dockerfile is not used - the platform reads
+NEXT_PUBLIC_API_URL from the project's environment variables during the build.
 
 Three stages: install dependencies, build, then a `node:22-alpine` runtime that
 carries only the standalone server, static assets, and `public/`, running as the

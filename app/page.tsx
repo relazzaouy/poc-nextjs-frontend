@@ -1,7 +1,7 @@
 import CallBackend from './call-backend';
 
-// Baked in at build time by Next.js. On Render this comes from the service's
-// NEXT_PUBLIC_API_URL environment variable, forwarded as a Docker build arg.
+// Baked in at build time by Next.js. When deployed this comes from the
+// project's NEXT_PUBLIC_API_URL environment variable, read during the build.
 const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? '';
 
 export default function Home() {
